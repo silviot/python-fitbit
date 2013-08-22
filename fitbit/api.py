@@ -621,7 +621,7 @@ class Fitbit(object):
         Convenience method for respond_to_invite
         """
         return self.respond_to_invite(other_user_id, accept=False)
-        
+
     def get_badges(self, user_id=None):
         """
         https://wiki.fitbit.com/display/API/API-Get-Badges
@@ -634,31 +634,23 @@ class Fitbit(object):
             user_id
         )
         return self.make_request(url)
-      
-    def subscription(self, subscription_id, subscriber_id, collection=None,
+
+    def subscription(self, subscription_id, subscriber_id=None, collection='user',
                      method='POST'):
         """
         https://wiki.fitbit.com/display/API/Fitbit+Subscriptions+API
         """
-        if not collection:
-            url = "%s/%s/user/-/apiSubscriptions/%s.json" % (
-                self.API_ENDPOINT,
-                self.API_VERSION,
-                subscription_id
-            )
-        else:
-            url = "%s/%s/user/-/%s/apiSubscriptions/%s-%s.json" % (
-                self.API_ENDPOINT,
-                self.API_VERSION,
-                collection,
-                subscription_id,
-                collection
-            )
-        return self.make_request(
-            url,
-            method=method,
-            headers={"X-Fitbit-Subscriber-id": subscriber_id}
+        url = "%s/%s/user/-/%s/apiSubscriptions/%s-%s.json" % (
+            self.API_ENDPOINT,
+            self.API_VERSION,
+            collection,
+            subscription_id,
+            collection
         )
+        headers = {}
+        if subscriber_id:
+            headers={"X-Fitbit-Subscriber-Id": subscriber_id}
+        return self.make_request(url, method=method, headers=headers)
 
     def list_subscriptions(self, collection=''):
         """
