@@ -17,6 +17,6 @@ __author_email__ = 'pperez@orcasinc.com'
 __copyright__ = 'Copyright 2012 ORCAS'
 __license__ = 'Apache 2.0'
 
-__version__ = '0.0.2'
+__version__ = '0.0.2-2133aa52872c26050c7dc28b5e58326766ec0f8e'
 
 # Module namespace.
