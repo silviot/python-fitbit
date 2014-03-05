@@ -157,6 +157,7 @@ class Fitbit(object):
 
     _resource_list = [
         'body',
+        'body_log_weight',
         'activities',
         'foods',
         'water',
@@ -285,7 +286,7 @@ class Fitbit(object):
                 self.API_ENDPOINT,
                 self.API_VERSION,
                 user_id,
-                resource,
+                resource.replace('_', '/'),
                 date,
             )
         else:
@@ -294,7 +295,7 @@ class Fitbit(object):
                 self.API_ENDPOINT,
                 self.API_VERSION,
                 user_id,
-                resource,
+                resource.replace('_', '/'),
             )
         return self.make_request(url, data)
 
